@@ -4,7 +4,7 @@ var generatePassword = function() {
   
   // declare the newPassword as an object with each of the password criteria as a key of the object
   var newPassword = {
-    length: 8,
+    length: 0,
     uppercase: true,
     lowercase: true,
     numbers: true,
@@ -14,9 +14,13 @@ var generatePassword = function() {
   console.log(newPassword);
   // Ask for pasword criteria with a series of promps
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
-  console.log("How many characters do you want your password to be?  Please specific a number between 8 and 128.");
-  newPassword.length = window.prompt("How many characters do you want your password to be?  Please specific a number between 8 and 128.");
-
+  
+  // the while loop will only allow the function to proceed if a value is entered between 8-128
+  while (newPassword.length < 8 || newPassword.length > 128) {
+    console.log("How many characters do you want your password to be?  Please specific a number between 8 and 128.");
+    newPassword.length = window.prompt("How many characters do you want your password to be?  Please specific a number between 8 and 128.");
+    newPassword.length = parseInt(newPassword.length);
+  }
 
   /// Ask if uppercase letters allowed, only allow a valid response
   console.log("Do you want to include UPPERCASE letters in your passwsord?");
@@ -37,12 +41,7 @@ var generatePassword = function() {
   newPassword.specialChar = window.confirm("Do you want to include special characters in your passwsord?");
 
   // Verify that at least one character type has been selected
-  if (newPassword.lowercase) {
-    console.log("lowercase is true");
-  }
-  else {
-    console.log("This isn't working");
-  }
+ 
 
   //Password is generated
 
