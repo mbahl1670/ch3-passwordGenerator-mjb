@@ -7,6 +7,11 @@ var newPassword = {
   specialChar: true
 };
 
+
+/* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
+random character were lost */
+var newChar;
+
 var askCriteria = function() {
   // set the length of the new password to 0 for repeated clickings of the button
   newPassword.length = 0;  
@@ -45,6 +50,7 @@ var askCriteria = function() {
 };
 
 var validateCriteria = function() {
+  // checks that at least one of the criteria is true
   if (newPassword.uppercase || newPassword.lowercase || newPassword.numbers || newPassword.specialChar) {
     return;
   }
@@ -53,11 +59,68 @@ var validateCriteria = function() {
     window.alert("You must have a password made up of at least an UPPER case letter, 'lower' case letter, numbers or special characters.  Please enter your criteria again.");
     askCriteria();
   }
-}
+};
+
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+  return value;
+};
+
+
+var randomUCLetter = function() {
+  var alphabetUC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return alphabetUC[Math.floor(Math.random() * alphabetUC.length)];
+};
+
+var randomLCLetter = function() {
+  var alphabetLC = "abcdefghijklmnopqrstuvwxyz";
+  return alphabetLC[Math.floor(Math.random() * alphabetLC.length)];
+};
+
+var randomSpecialChar = function() {
+  var  rspecChar = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~", "\\"];  
+  return rspecChar[Math.floor(Math.random() * rspecChar.length)];
+};
+
+
+
+var getChar = function () {
+  debugger;
+  var charType = randomNumber(1,4);
+  if (charType === 1 && newPassword.uppercase) { // picks an uppercase letter
+    console.log("case1: random upper case letter");
+    newChar = randomUCLetter();
+    return newChar;
+  }
+
+  else if (charType === 2 && newPassword.lowercase) { // picks an lowercase letter
+    console.log("case2: randome lower case letter");
+    newChar = randomLCLetter();
+    return newChar;
+  }
+  
+  else if (charType === 3 && newPassword.numbers) { // picks a number
+    console.log("case3: random number");
+    newChar = randomNumber(0,9);
+    return newChar;
+  }
+    
+  else if (charType === 4 && newPassword.specialChar) { // picks a special character
+    console.log("case4: random special character")
+    newChar = randomSpecialChar();
+    return newChar;
+  }
+  
+  else {
+    newChar = undefined;
+    getChar();
+  }
+};
+
 
 // Assignment code here
 var generatePassword = function() {  
-  
+  // debugger;
   // Ask for pasword criteria with a series of promps
   askCriteria();
   
@@ -65,10 +128,12 @@ var generatePassword = function() {
   validateCriteria();
 
   //Password is generated
-
+  
+  // new random character is generated and assigned to variable newChar
+  getChar();
   
   // have the function return the new password
-  return newPassword.length;
+  return newChar;
 };
 
 
