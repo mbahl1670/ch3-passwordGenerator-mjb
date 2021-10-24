@@ -23,13 +23,13 @@ var askCriteria = function() {
   newPassword.passWord = [];
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
   // the while loop will only allow the function to proceed if a value is entered between 8-128
-  console.log("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
-  newPassword.length = window.prompt("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
+  console.log("How many characters do you want your password to be?\nPlease choose a number between 8 and 128.");
+  newPassword.length = window.prompt("How many characters do you want your password to be?\nPlease choose a number between 8 and 128.");
   // convert the string entered to an integer number
   newPassword.length = parseInt(newPassword.length);
 
   while (isNaN(newPassword.length) || newPassword.length < 8 || newPassword.length > 128) {
-    newPassword.length = window.prompt("This is not a valid password length!  Please choose a number between 8 and 128.");
+    newPassword.length = window.prompt("This is not a valid password length!\nPlease choose a number between 8 and 128.");
     newPassword.length = parseInt(newPassword.length);
   }
   
