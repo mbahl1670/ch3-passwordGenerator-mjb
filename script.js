@@ -1,20 +1,26 @@
-// Create an object that will store the password's criteri
+// Assignment code here
+
+// Create an object that will store the password and it's criteria
 var newPassword = {
   length: 0,
   uppercase: true,
   lowercase: true,
   numbers: true,
-  specialChar: true
+  specialChar: true,
+  passWord: []
 };
-
 
 /* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
 random character were lost */
 var newChar;
 
+
+
+// FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
-  // set the length of the new password to 0 for repeated clickings of the button
+  // set the length of the new password to 0 and clear the old password for repeated clickings of the button
   newPassword.length = 0;  
+  newPassword.passWord = [];
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
   // the while loop will only allow the function to proceed if a value is entered between 8-128
   console.log("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
@@ -42,21 +48,24 @@ var askCriteria = function() {
   newPassword.numbers = window.confirm("Do you want to include numbers in your password?");
   
   // Ask if special characters allowed, only allow a valid resposne
-  console.log("Do you want to include special characters in your password?");
-  newPassword.specialChar = window.confirm("Do you want to include special characters in your password?");
+  console.log("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
+  newPassword.specialChar = window.confirm("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
 
-  // display what useer has entered for debugging
+  // display what useer has entered for debugging and so user can view what they entered
   console.log(newPassword);
 };
 
+
+
+// FUNCTION TO VALIDATE THE CRITERIA ENTERED
 var validateCriteria = function() {
   // checks that at least one of the criteria is true
   if (newPassword.uppercase || newPassword.lowercase || newPassword.numbers || newPassword.specialChar) {
     return;
   }
   else {
-    console.log("You must have a password made up of at least an UPPER case letter, 'lower' case letter, numbers or special characters.  Please enter your criteria again.");
-    window.alert("You must have a password made up of at least an UPPER case letter, 'lower' case letter, numbers or special characters.  Please enter your criteria again.");
+    console.log("You must have a password made up of at least an UPPER case letters, 'lower' case letters, numbers or special characters.  Please enter your criteria again.");
+    window.alert("You must have a password made up of at least an UPPER case letters, 'lower' case letters, numbers or special characters.  Please enter your criteria again.");
     askCriteria();
   }
 };
@@ -67,29 +76,33 @@ var randomNumber = function(min, max) {
 };
 
 
-var randomUCLetter = function() {
+
+
+// FUNCTIONS RELATED TO GENERATING RANDOM CHARACTERS
+
+var randomUCLetter = function() { // generate a random UPPER CASE letter
   var alphabetUC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return alphabetUC[Math.floor(Math.random() * alphabetUC.length)];
 };
 
-var randomLCLetter = function() {
+var randomLCLetter = function() { // generate a random 'lower case' letter
   var alphabetLC = "abcdefghijklmnopqrstuvwxyz";
   return alphabetLC[Math.floor(Math.random() * alphabetLC.length)];
 };
 
-var randomSpecialChar = function() {
+var randomSpecialChar = function() { // generate a random special character
+  // ran into issues entering the special characters into an array.  Found it less confusing to just enter them all separately
   var  rspecChar = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~", "\\"];  
   return rspecChar[Math.floor(Math.random() * rspecChar.length)];
 };
 
 
-
-var getChar = function () {
+var getChar = function () { // generates a rancom character.  found that I needed to store the randomaly generated character into a varible ousdide the function
   // debugger;
   var charType = randomNumber(1,4);
   switch (charType) {
     case 1:
-      console.log("case1: random upper case letter");
+      // console.log("case1: random upper case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.uppercase) { // picks an uppercase letter  
         newChar = randomUCLetter();
         return newChar;
@@ -100,7 +113,7 @@ var getChar = function () {
       break;
 
     case 2:
-      console.log("case2: randome lower case letter");
+      // console.log("case2: randome lower case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.lowercase) { // picks an lowercase letter
         newChar = randomLCLetter();
         return newChar;
@@ -111,7 +124,7 @@ var getChar = function () {
       break;
     
     case 3:
-      console.log("case3: random number");
+      // console.log("case3: random number"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.numbers) { // picks a number
         newChar = randomNumber(0,9);
         return newChar;
@@ -122,7 +135,7 @@ var getChar = function () {
       break;
       
     case 4:
-      console.log("case4: random special character");
+      // console.log("case4: random special character"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.specialChar) { // picks a special character  
         newChar = randomSpecialChar();
         return newChar;
@@ -139,22 +152,22 @@ var getChar = function () {
 };
 
 
-// Assignment code here
+
 var generatePassword = function() {  
   // debugger;
   // Ask for pasword criteria with a series of promps
-  askCriteria();
-  
+  askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
-
   //Password is generated
-  
   // new random character is generated and assigned to variable newChar
-  getChar();
-  
+  for(var i = 0; i < newPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
+  }
   // have the function return the new password
-  return newChar;
+  return newPassword.passWord.join("");
 };
 
 
