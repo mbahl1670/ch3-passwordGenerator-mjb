@@ -28,22 +28,22 @@ var askCriteria = function() {
   }
   
   /// Ask if uppercase letters allowed, only allow a valid response
-  console.log("Do you want to include UPPERCASE letters in your passwsord?");
-  newPassword.uppercase = window.confirm("Do you want to include UPPERCASE letters in your passwsord?");
+  console.log("Do you want to include UPPERCASE letters in your password?");
+  newPassword.uppercase = window.confirm("Do you want to include UPPERCASE letters in your password?");
 
 
   // Ask if lowercase letters allowed, only allow a valid response
-  console.log("Do you want to include 'lowercase' letters in your passwsord?");
-  newPassword.lowercase = window.confirm("Do you want to include 'lowercase' letters in your passwsord?");
+  console.log("Do you want to include 'lowercase' letters in your password?");
+  newPassword.lowercase = window.confirm("Do you want to include 'lowercase' letters in your password?");
 
 
   // Ask if numbers allowed, only allow a valid resposne
-  console.log("Do you want to include numbers in your passwsord?");
-  newPassword.numbers = window.confirm("Do you want to include numbers in your passwsord?");
+  console.log("Do you want to include numbers in your password?");
+  newPassword.numbers = window.confirm("Do you want to include numbers in your password?");
   
   // Ask if special characters allowed, only allow a valid resposne
-  console.log("Do you want to include special characters in your passwsord?");
-  newPassword.specialChar = window.confirm("Do you want to include special characters in your passwsord?");
+  console.log("Do you want to include special characters in your password?");
+  newPassword.specialChar = window.confirm("Do you want to include special characters in your password?");
 
   // display what useer has entered for debugging
   console.log(newPassword);
@@ -85,35 +85,56 @@ var randomSpecialChar = function() {
 
 
 var getChar = function () {
-  debugger;
+  // debugger;
   var charType = randomNumber(1,4);
-  if (charType === 1 && newPassword.uppercase) { // picks an uppercase letter
-    console.log("case1: random upper case letter");
-    newChar = randomUCLetter();
-    return newChar;
-  }
+  switch (charType) {
+    case 1:
+      console.log("case1: random upper case letter");
+      if (newPassword.uppercase) { // picks an uppercase letter  
+        newChar = randomUCLetter();
+        return newChar;
+      }
+      else {
+        getChar();
+      }
+      break;
 
-  else if (charType === 2 && newPassword.lowercase) { // picks an lowercase letter
-    console.log("case2: randome lower case letter");
-    newChar = randomLCLetter();
-    return newChar;
-  }
-  
-  else if (charType === 3 && newPassword.numbers) { // picks a number
-    console.log("case3: random number");
-    newChar = randomNumber(0,9);
-    return newChar;
-  }
+    case 2:
+      console.log("case2: randome lower case letter");
+      if (newPassword.lowercase) { // picks an lowercase letter
+        newChar = randomLCLetter();
+        return newChar;
+      }
+      else {
+        getChar();
+      }
+      break;
     
-  else if (charType === 4 && newPassword.specialChar) { // picks a special character
-    console.log("case4: random special character")
-    newChar = randomSpecialChar();
-    return newChar;
-  }
-  
-  else {
-    newChar = undefined;
-    getChar();
+    case 3:
+      console.log("case3: random number");
+      if (newPassword.numbers) { // picks a number
+        newChar = randomNumber(0,9);
+        return newChar;
+      }
+      else {
+        getChar();
+      }
+      break;
+      
+    case 4:
+      console.log("case4: random special character");
+      if (newPassword.specialChar) { // picks a special character  
+        newChar = randomSpecialChar();
+        return newChar;
+      }
+      else {
+        getChar();
+      }
+      break;
+    
+    defalut: 
+      getChar();
+      break;
   }
 };
 
