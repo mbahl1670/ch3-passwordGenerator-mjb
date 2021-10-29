@@ -27,4 +27,10 @@ https://mbahl1670.github.io/ch3-passwordGenerator-mjb/
 
 
 ## How this was accomplished
-* 
+* Wrote psuedocode breaking down each step of how the password generator would work
+* Created a function for each step of the password generation
+* Created askCriteria(), which asks for password length (only allowing a number between 8-128 to be entered) and then yes/no questions regarding each criteria
+* Created a function to validate that the user has included at least one character type for their password
+* Created a function that will generate a random character based off the criteria entered in by the user
+* Put the character creation function in a for loop that will generate a number of characters that matches the user's chosen password length
+* Each generated character is then stored in an array, which is then printed out on the screen as a string
