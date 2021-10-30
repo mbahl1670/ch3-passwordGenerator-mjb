@@ -35,6 +35,7 @@ var askCriteria = function() {
   // set the length of the new password to 0 and clear the old password for repeated clickings of the button
   // newPassword.length = 0;  
   // newPassword.passWord = [];
+  // debugger;
   newPassword.reset();
   isUpper = false;
   isLower = false;
@@ -183,10 +184,12 @@ var createNewPassword = function () {
 }
 
 var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isUpper && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
+  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
+    console.log("Equal") 
     return true;
   }
   else {
+    newPassword.passWord = [];
     return false;
   }
 };
