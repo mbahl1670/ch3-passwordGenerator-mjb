@@ -7,8 +7,22 @@ var newPassword = {
   lowercase: true,
   numbers: true,
   specialChar: true,
-  passWord: []
+  passWord: [],
+  reset: function() {
+    this.length = 0;
+    this.uppercase = true;
+    this.lowercase = true;
+    this.numbers = true;
+    this.specialChar = true;
+    this.passWord = [];
+  }
 };
+
+// variables to validate if the final password will have at least one of each entered character
+var isUpper = false;
+var isLower = false;
+var isNumber = false;
+var isSpec = false;
 
 /* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
 random character were lost */
