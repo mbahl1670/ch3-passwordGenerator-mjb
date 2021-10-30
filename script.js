@@ -98,11 +98,9 @@ var randomSpecialChar = function() { // generate a random special character
 
 
 var getChar = function () { // generates a rancom character.  found that I needed to store the randomaly generated character into a varible ousdide the function
-  // debugger;
   var charType = randomNumber(1,4);
   switch (charType) {
     case 1:
-      // console.log("case1: random upper case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.uppercase) { // picks an uppercase letter  
         newChar = randomUCLetter();
         return newChar;
@@ -113,7 +111,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
 
     case 2:
-      // console.log("case2: randome lower case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.lowercase) { // picks an lowercase letter
         newChar = randomLCLetter();
         return newChar;
@@ -124,7 +121,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
     
     case 3:
-      // console.log("case3: random number"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.numbers) { // picks a number
         newChar = randomNumber(0,9);
         return newChar;
@@ -135,7 +131,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
       
     case 4:
-      // console.log("case4: random special character"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.specialChar) { // picks a special character  
         newChar = randomSpecialChar();
         return newChar;
@@ -154,7 +149,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
 
 
 var generatePassword = function() {  
-  // debugger;
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
@@ -164,7 +158,6 @@ var generatePassword = function() {
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
   }
   // have the function return the new password
   return newPassword.passWord.join("");
