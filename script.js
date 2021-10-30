@@ -19,10 +19,6 @@ var newChar;
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
   // set the length of the new password to 0 and clear the old password for repeated clickings of the button
-<<<<<<< HEAD
-  newPassword.length = 0;  
-  newPassword.passWord = [];
-=======
   // newPassword.length = 0;  
   // newPassword.passWord = [];
   // debugger;
@@ -31,7 +27,6 @@ var askCriteria = function() {
   isLower = false;
   isNumber = false;
   isSpec = false;
->>>>>>> feature/validation2
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
   // the while loop will only allow the function to proceed if a value is entered between 8-128
   console.log("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
@@ -162,32 +157,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
-<<<<<<< HEAD
-
-=======
-var createNewPassword = function () {
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
-  }
-}
-
-var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    return true;
-  }
-  else {
-    newPassword.passWord = [];
-    return false;
-  }
-};
-
-var displayPassword = function() {
-  console.log(newPassword.passWord.join(""));
-  window.alert(newPassword.passWord.join(""));
-};
->>>>>>> feature/validation2
 
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
@@ -196,7 +165,6 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
-<<<<<<< HEAD
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
@@ -204,22 +172,6 @@ var generatePassword = function() {
   }
   // have the function return the new password
   return newPassword.passWord.join("");
-=======
- 
-  // create a new Password
-  createNewPassword();
- 
-  // check if the password contains all of the criteria the user entered
-  if (validatePassword()) { 
-    // if the new password does contain all of the criteria, return the password as a string
-    console.log("Password : " + newPassword.passWord.join(""));
-    return newPassword.passWord.join("");  
-  }
-  else {
-    // if the new password does not contain all the criteria, make a new password
-    createNewPassword();
-  }
->>>>>>> feature/validation2
 };
 
 
