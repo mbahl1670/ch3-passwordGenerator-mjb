@@ -27,7 +27,7 @@ var isSpec = false;
 /* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
 random character were lost */
 var newChar;
-
+var validNewPassword;
 
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
@@ -184,6 +184,7 @@ var createNewPassword = function () {
 
 var validatePassword = function() {
   if (newPassword.uppercase === isUpper && newPassword.lowercase === isUpper && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
+    validNewPassword = newPassword;
     return true;
   }
   else {
@@ -212,9 +213,9 @@ var generatePassword = function() {
 
   // function that will validate if the final password has at least one of character of all the user defined characters specified
   */
-  
+  debugger;
   if (validatePassword()) {
-    return newPassword.passWord.join("");  
+    return validNewPassword.passWord.join("");  
   }
   else {
     createNewPassword();
