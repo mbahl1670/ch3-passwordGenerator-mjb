@@ -32,10 +32,6 @@ var newChar;
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
-  // set the length of the new password to 0 and clear the old password for repeated clickings of the button
-  // newPassword.length = 0;  
-  // newPassword.passWord = [];
-  // debugger;
   newPassword.reset();
   isUpper = false;
   isLower = false;
@@ -203,9 +199,7 @@ var generatePassword = function() {
   askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
-  //Password is generated
-  // new random character is generated and assigned to variable newChar
- 
+
   // create a new Password
   createNewPassword();
  
