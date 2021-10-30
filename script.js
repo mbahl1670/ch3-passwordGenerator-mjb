@@ -7,48 +7,29 @@ var newPassword = {
   lowercase: true,
   numbers: true,
   specialChar: true,
-  passWord: [],
-  reset: function() {
-    this.length = 0;
-    this.uppercase = true;
-    this.lowercase = true;
-    this.numbers = true;
-    this.specialChar = true;
-    this.passWord = [];
-  }
+  passWord: []
 };
-
-// variables to validate if the final password will have at least one of each entered character
-var isUpper = false;
-var isLower = false;
-var isNumber = false;
-var isSpec = false;
 
 /* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
 random character were lost */
 var newChar;
-var validNewPassword;
+
 
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
   // set the length of the new password to 0 and clear the old password for repeated clickings of the button
-  // newPassword.length = 0;  
-  // newPassword.passWord = [];
-  newPassword.reset();
-  isUpper = false;
-  isLower = false;
-  isNumber = false;
-  isSpec = false;
+  newPassword.length = 0;  
+  newPassword.passWord = [];
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
   // the while loop will only allow the function to proceed if a value is entered between 8-128
-  console.log("How many characters do you want your password to be?\nPlease choose a number between 8 and 128.");
-  newPassword.length = window.prompt("How many characters do you want your password to be?\nPlease choose a number between 8 and 128.");
+  console.log("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
+  newPassword.length = window.prompt("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
   // convert the string entered to an integer number
   newPassword.length = parseInt(newPassword.length);
 
   while (isNaN(newPassword.length) || newPassword.length < 8 || newPassword.length > 128) {
-    newPassword.length = window.prompt("This is not a valid password length!\nPlease choose a number between 8 and 128.");
+    newPassword.length = window.prompt("This is not a valid password length!  Please choose a number between 8 and 128.");
     newPassword.length = parseInt(newPassword.length);
   }
   
@@ -123,7 +104,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 1:
       // console.log("case1: random upper case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.uppercase) { // picks an uppercase letter  
-        isUpper = true;
         newChar = randomUCLetter();
         return newChar;
       }
@@ -135,7 +115,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 2:
       // console.log("case2: randome lower case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.lowercase) { // picks an lowercase letter
-        isLower = true;
         newChar = randomLCLetter();
         return newChar;
       }
@@ -147,7 +126,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 3:
       // console.log("case3: random number"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.numbers) { // picks a number
-        isNumber = true;
         newChar = randomNumber(0,9);
         return newChar;
       }
@@ -159,7 +137,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 4:
       // console.log("case4: random special character"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.specialChar) { // picks a special character  
-        isSpec = true;
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -174,24 +151,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
-var createNewPassword = function () {
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
-  }
-}
-
-var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isUpper && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    validNewPassword = newPassword;
-    return true;
-  }
-  else {
-    return false;
-  }
-};
-
 
 
 var generatePassword = function() {  
@@ -202,27 +161,13 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
-  
-  createNewPassword();
-  /*
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
     // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
   }
-
-  // function that will validate if the final password has at least one of character of all the user defined characters specified
-  */
-  debugger;
-  if (validatePassword()) {
-    return validNewPassword.passWord.join("");  
-  }
-  else {
-    createNewPassword();
-  }
-  
   // have the function return the new password
-  // return newPassword.passWord.join("");
+  return newPassword.passWord.join("");
 };
 
 
