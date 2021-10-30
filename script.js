@@ -67,7 +67,7 @@ var askCriteria = function() {
   console.log("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
   newPassword.specialChar = window.confirm("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
 
-  // display what useer has entered for debugging and so user can view what they entered
+  // display what user has entered for debugging and so user can view what they entered
   console.log(newPassword);
 };
 
@@ -114,11 +114,9 @@ var randomSpecialChar = function() { // generate a random special character
 
 
 var getChar = function () { // generates a rancom character.  found that I needed to store the randomaly generated character into a varible ousdide the function
-  debugger;
   var charType = randomNumber(1,4);
   switch (charType) {
     case 1:
-      // console.log("case1: random upper case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.uppercase) { // picks an uppercase letter  
         isUpper = true;
         newChar = randomUCLetter();
@@ -130,7 +128,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
 
     case 2:
-      // console.log("case2: randome lower case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.lowercase) { // picks an lowercase letter
         isLower = true;
         newChar = randomLCLetter();
@@ -142,7 +139,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
     
     case 3:
-      // console.log("case3: random number"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.numbers) { // picks a number
         isNumber = true;
         newChar = randomNumber(0,9);
@@ -154,7 +150,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
       break;
       
     case 4:
-      // console.log("case4: random special character"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.specialChar) { // picks a special character  
         isSpec = true;
         newChar = randomSpecialChar();
@@ -175,7 +170,6 @@ var createNewPassword = function () {
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
   }
 }
 
@@ -187,11 +181,6 @@ var validatePassword = function() {
     newPassword.passWord = [];
     return false;
   }
-};
-
-var displayPassword = function() {
-  console.log(newPassword.passWord.join(""));
-  window.alert(newPassword.passWord.join(""));
 };
 
 var generatePassword = function() {  
