@@ -7,22 +7,8 @@ var newPassword = {
   lowercase: true,
   numbers: true,
   specialChar: true,
-  passWord: [],
-  reset: function() {
-    this.length = 0;
-    this.uppercase = true;
-    this.lowercase = true;
-    this.numbers = true;
-    this.specialChar = true;
-    this.passWord = [];
-  }
+  passWord: []
 };
-
-// variables to validate if the final password will have at least one of each entered character
-var isUpper = false;
-var isLower = false;
-var isNumber = false;
-var isSpec = false;
 
 /* assigned a global variable of newChar.  was running into issues where the local variables assigned during the loop to get a 
 random character were lost */
@@ -120,7 +106,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 1:
       // console.log("case1: random upper case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.uppercase) { // picks an uppercase letter  
-        isUpper = true;
         newChar = randomUCLetter();
         return newChar;
       }
@@ -132,7 +117,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 2:
       // console.log("case2: randome lower case letter"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.lowercase) { // picks an lowercase letter
-        isLower = true;
         newChar = randomLCLetter();
         return newChar;
       }
@@ -144,7 +128,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 3:
       // console.log("case3: random number"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.numbers) { // picks a number
-        isNumber = true;
         newChar = randomNumber(0,9);
         return newChar;
       }
@@ -156,7 +139,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
     case 4:
       // console.log("case4: random special character"); NO LONGER NEEDED, USED FOR DEBUGGING
       if (newPassword.specialChar) { // picks a special character  
-        isSpec = true;
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -171,28 +153,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
-var createNewPassword = function () {
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
-  }
-}
-
-var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    return true;
-  }
-  else {
-    newPassword.passWord = [];
-    return false;
-  }
-};
-
-var displayPassword = function() {
-  console.log(newPassword.passWord.join(""));
-  window.alert(newPassword.passWord.join(""));
-};
 
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
@@ -213,6 +173,8 @@ var generatePassword = function() {
     // if the new password does not contain all the criteria, make a new password
     createNewPassword();
   }
+  // have the function return the new password
+  return newPassword.passWord.join("");
 };
 
 
