@@ -161,7 +161,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
 };
 
 
-
+/*
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
   askCriteria();  
@@ -176,7 +176,28 @@ var generatePassword = function() {
   // have the function return the new password
   return newPassword.passWord.join("");
 };
+*/
 
+var generatePassword = function() {  
+  // Ask for pasword criteria with a series of promps
+  askCriteria();  
+  // Verify that at least one character type has been selected
+  validateCriteria();
+
+  // create a new Password
+  createNewPassword();
+ 
+  // check if the password contains all of the criteria the user entered
+  if (validatePassword()) { 
+    // if the new password does contain all of the criteria, return the password as a string
+    console.log("Password : " + newPassword.passWord.join(""));
+    return newPassword.passWord.join("");  
+  }
+  else {
+    // if the new password does not contain all the criteria, make a new password
+    createNewPassword();
+  }
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
