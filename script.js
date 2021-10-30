@@ -118,7 +118,7 @@ var randomSpecialChar = function() { // generate a random special character
 
 
 var getChar = function () { // generates a rancom character.  found that I needed to store the randomaly generated character into a varible ousdide the function
-  // debugger;
+  debugger;
   var charType = randomNumber(1,4);
   switch (charType) {
     case 1:
@@ -185,7 +185,6 @@ var createNewPassword = function () {
 
 var validatePassword = function() {
   if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    console.log("Equal") 
     return true;
   }
   else {
@@ -194,37 +193,32 @@ var validatePassword = function() {
   }
 };
 
-
+var displayPassword = function() {
+  console.log(newPassword.passWord.join(""));
+  window.alert(newPassword.passWord.join(""));
+};
 
 var generatePassword = function() {  
-  // debugger;
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
-  
+ 
+  // create a new Password
   createNewPassword();
-  /*
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
-  }
-
-  // function that will validate if the final password has at least one of character of all the user defined characters specified
-  */
-  
-  if (validatePassword()) {
+ 
+  // check if the password contains all of the criteria the user entered
+  if (validatePassword()) { 
+    // if the new password does contain all of the criteria, return the password as a string
+    console.log("Password : " + newPassword.passWord.join(""));
     return newPassword.passWord.join("");  
   }
   else {
+    // if the new password does not contain all the criteria, make a new password
     createNewPassword();
   }
-  
-  // have the function return the new password
-  // return newPassword.passWord.join("");
 };
 
 
@@ -238,7 +232,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
