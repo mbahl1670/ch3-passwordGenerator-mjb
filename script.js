@@ -7,7 +7,15 @@ var newPassword = {
   lowercase: true,
   numbers: true,
   specialChar: true,
-  passWord: []
+  passWord: [],
+  reset: function() {
+    this.length = 0;
+    this.uppercase = true;
+    this.lowercase = true;
+    this.numbers = true;
+    this.specialChar = true;
+    this.passWord = [];
+  }
 };
 
 // variables to validate if the final password will have at least one of each entered character
@@ -25,8 +33,9 @@ var newChar;
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
   // set the length of the new password to 0 and clear the old password for repeated clickings of the button
-  newPassword.length = 0;  
-  newPassword.passWord = [];
+  // newPassword.length = 0;  
+  // newPassword.passWord = [];
+  newPassword.reset();
   isUpper = false;
   isLower = false;
   isNumber = false;
@@ -192,6 +201,9 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
+  
+  createNewPassword();
+  /*
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
@@ -199,15 +211,17 @@ var generatePassword = function() {
   }
 
   // function that will validate if the final password has at least one of character of all the user defined characters specified
-  /*
+  */
+  
   if (validatePassword()) {
     return newPassword.passWord.join("");  
-  };
-  else {
-    */
   }
+  else {
+    createNewPassword();
+  }
+  
   // have the function return the new password
-  return newPassword.passWord.join("");
+  // return newPassword.passWord.join("");
 };
 
 
