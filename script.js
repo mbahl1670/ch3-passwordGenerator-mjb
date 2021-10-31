@@ -152,11 +152,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
       
     case 4:
       if (newPassword.specialChar) { // picks a special character  
-<<<<<<< HEAD
-        isNumber = true;
-=======
         isSpec = true;
->>>>>>> develop
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -165,7 +161,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
       }
       break;
     
-    defalut: 
+    default: 
       getChar();
       break;
   }
@@ -220,23 +216,13 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
-<<<<<<< HEAD
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-  }
-=======
   createPassword();
->>>>>>> develop
   // have the function return the new password
   console.log("Password: " + newPassword.passWord.join(""));
   return newPassword.passWord.join("");
 
-<<<<<<< HEAD
-=======
 };
 
->>>>>>> develop
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
