@@ -208,7 +208,7 @@ var generatePassword = function() {
   // debugger;
   createPassword();
   // have the function return the new password
-  
+  console.log("Password: " + newPassword.passWord.join(""));
   return newPassword.passWord.join("");
 
 };
