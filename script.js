@@ -138,7 +138,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
         getChar();
       }
       break;
-    
+     
     case 3:
       if (newPassword.numbers) { // picks a number
         isNumber = true;
@@ -152,7 +152,11 @@ var getChar = function () { // generates a rancom character.  found that I neede
       
     case 4:
       if (newPassword.specialChar) { // picks a special character  
+<<<<<<< HEAD
         isNumber = true;
+=======
+        isSpec = true;
+>>>>>>> develop
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -167,6 +171,46 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
+var createNewPassword = function () {
+  for(var i = 0; i < newPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+    // console.log(newPassword.passWord); NO LONGER NEEDED, USED FOR DEBUGGING
+  }
+}
+
+var displayPassword = function() {
+  console.log(newPassword.passWord.join(""));
+  window.alert(newPassword.passWord.join(""));
+};
+
+var validatePassword = function(tempPassword) {
+  if (tempPassword.uppercase === isUpper && tempPassword.lowercase === isLower && tempPassword.numbers === isNumber && tempPassword.specialChar === isSpec) {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+
+var createPassword = function() {
+  var tempPassword = newPassword;
+  for(var i = 0; i < tempPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    tempPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+  }
+  if (validatePassword(tempPassword) && tempPassword.length === newPassword.length) {
+    newPassword = tempPassword;
+  }
+  else {
+    tempPassword.passWord = [];
+    isUpper = false;
+    isLower = false;
+    isNumber = false;
+    isSpec = false;
+    createPassword();
+  }
+};
 
 
 var generatePassword = function() {  
@@ -176,14 +220,23 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
+<<<<<<< HEAD
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
   }
+=======
+  createPassword();
+>>>>>>> develop
   // have the function return the new password
+  console.log("Password: " + newPassword.passWord.join(""));
   return newPassword.passWord.join("");
+
+<<<<<<< HEAD
+=======
 };
 
+>>>>>>> develop
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
