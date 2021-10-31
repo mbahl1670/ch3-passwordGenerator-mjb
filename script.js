@@ -32,9 +32,12 @@ var newChar;
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
-  // set the length of the new password to 0 and clear the old password for repeated clickings of the button
-  newPassword.length = 0;  
-  newPassword.passWord = [];
+  // set the length of the new password to 0 and clear the old password for repeated clickings of the button  
+  newPassword.reset();
+  isUpper = false;
+  isLower = false;
+  isNumber = false;
+  isSpec = false;
   // Ask for length of the password, accept values between 8 - 128 characters long, only allow a valid response
   // the while loop will only allow the function to proceed if a value is entered between 8-128
   console.log("How many characters do you want your password to be?  Please choose a number between 8 and 128.");
@@ -42,7 +45,7 @@ var askCriteria = function() {
   // convert the string entered to an integer number
   newPassword.length = parseInt(newPassword.length);
 
-  while (isNaN(newPassword.length) || newPassword.length < 8 || newPassword.length > 128) {
+  while (isNaN(newPassword.length) || newPassword.length < 4 || newPassword.length > 128) {
     newPassword.length = window.prompt("This is not a valid password length!  Please choose a number between 8 and 128.");
     newPassword.length = parseInt(newPassword.length);
   }
@@ -116,6 +119,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
   switch (charType) {
     case 1:
       if (newPassword.uppercase) { // picks an uppercase letter  
+        isUpper = true;
         newChar = randomUCLetter();
         return newChar;
       }
@@ -126,6 +130,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
 
     case 2:
       if (newPassword.lowercase) { // picks an lowercase letter
+        isLower = true;
         newChar = randomLCLetter();
         return newChar;
       }
@@ -136,6 +141,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
     
     case 3:
       if (newPassword.numbers) { // picks a number
+        isNumber = true;
         newChar = randomNumber(0,9);
         return newChar;
       }
@@ -146,6 +152,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
       
     case 4:
       if (newPassword.specialChar) { // picks a special character  
+        isNumber = true;
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -161,7 +168,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
 };
 
 
-/*
+
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
   askCriteria();  
@@ -176,17 +183,37 @@ var generatePassword = function() {
   // have the function return the new password
   return newPassword.passWord.join("");
 };
-*/
+
+/*
+var createNewPassword = function () {
+  for(var i = 0; i < newPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+  }
+}
+
+var validatePassword = function() {
+  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
+    return true;
+  }
+  else {
+    isUpper = false;
+    isLower = false;
+    isNumber = false;
+    isSpec = false;
+    newPassword.passWord = [];
+    return false;
+  }
+};
 
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
-
+  // debugger;
   // create a new Password
   createNewPassword();
- 
   // check if the password contains all of the criteria the user entered
   if (validatePassword()) { 
     // if the new password does contain all of the criteria, return the password as a string
@@ -196,9 +223,10 @@ var generatePassword = function() {
   else {
     // if the new password does not contain all the criteria, make a new password
     createNewPassword();
+    validatePassword();
   }
 };
-
+*/
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
