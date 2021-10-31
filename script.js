@@ -138,7 +138,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
         getChar();
       }
       break;
-    
+     
     case 3:
       if (newPassword.numbers) { // picks a number
         isNumber = true;
