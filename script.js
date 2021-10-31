@@ -32,10 +32,7 @@ var newChar;
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
-<<<<<<< HEAD
-=======
   // set the length of the new password to 0 and clear the old password for repeated clickings of the button  
->>>>>>> bug/merge-conflicts
   newPassword.reset();
   isUpper = false;
   isLower = false;
@@ -118,10 +115,6 @@ var randomSpecialChar = function() { // generate a random special character
 
 
 var getChar = function () { // generates a rancom character.  found that I needed to store the randomaly generated character into a varible ousdide the function
-<<<<<<< HEAD
-  debugger;
-=======
->>>>>>> bug/merge-conflicts
   var charType = randomNumber(1,4);
   switch (charType) {
     case 1:
@@ -227,8 +220,6 @@ var createPassword = function() {
 };
 
 var generatePassword = function() {  
-<<<<<<< HEAD
-=======
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
@@ -245,32 +236,15 @@ var generatePassword = function() {
 
 /*
 var generatePassword = function() {  
->>>>>>> bug/merge-conflicts
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
-<<<<<<< HEAD
-
-  // create a new Password
-  createNewPassword();
- 
-  // check if the password contains all of the criteria the user entered
-  if (validatePassword()) { 
-    // if the new password does contain all of the criteria, return the password as a string
-    console.log("Password : " + newPassword.passWord.join(""));
-    return newPassword.passWord.join("");  
-  }
-  else {
-    // if the new password does not contain all the criteria, make a new password
-    createNewPassword();
-=======
   //Password is generated
   // new random character is generated and assigned to variable newChar
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
->>>>>>> bug/merge-conflicts
   }
 };
 */
