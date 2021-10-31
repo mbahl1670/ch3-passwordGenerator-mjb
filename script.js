@@ -167,11 +167,21 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
+
 var createPassword = function() {
   debugger;
   for(var i = 0; i < newPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
     newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+  }
+};
+
+var validatePassword = function(tempPassword) {
+  if (tempPassword.uppercase === isUpper && tempPassword.lowercase === isLower && tempPassword.numbers === isNumber && tempPassword.specialChar === isSpec) {
+    return true;
+  }
+  else {
+    return false;
   }
 };
 
@@ -184,7 +194,17 @@ var generatePassword = function() {
   // new random character is generated and assigned to variable newChar
   createPassword();
   // have the function return the new password
-  return newPassword.passWord.join("");
+  if (validatePassword(newPassword)) {
+    return newPassword.passWord.join("");
+  }
+  else {
+    newPassword.passWord = [];
+    isUpper = false;
+    isLower = false;
+    isNumber = false;
+    isSpec = false;
+    createPassword();
+  }
 };
 
 /*
