@@ -32,6 +32,7 @@ var newChar;
 
 // FUNCTIONS FOR GATHERING USER DEFINED CRITERIA
 var askCriteria = function() {
+  // set the length of the new password to 0 and clear the old password for repeated clickings of the button  
   newPassword.reset();
   isUpper = false;
   isLower = false;
@@ -67,7 +68,7 @@ var askCriteria = function() {
   console.log("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
   newPassword.specialChar = window.confirm("Do you want to include special characters in your password?\nWarning: A space ' ' is considered a special character.");
 
-  // display what user has entered for debugging and so user can view what they entered
+  // display what useer has entered for debugging and so user can view what they entered
   console.log(newPassword);
 };
 
@@ -151,7 +152,7 @@ var getChar = function () { // generates a rancom character.  found that I neede
       
     case 4:
       if (newPassword.specialChar) { // picks a special character  
-        isSpec = true;
+        isNumber = true;
         newChar = randomSpecialChar();
         return newChar;
       }
@@ -166,44 +167,22 @@ var getChar = function () { // generates a rancom character.  found that I neede
   }
 };
 
-var createNewPassword = function () {
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-  }
-}
 
-var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    return true;
-  }
-  else {
-    newPassword.passWord = [];
-    return false;
-  }
-};
 
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
   askCriteria();  
   // Verify that at least one character type has been selected
   validateCriteria();
-
-  // create a new Password
-  createNewPassword();
- 
-  // check if the password contains all of the criteria the user entered
-  if (validatePassword()) { 
-    // if the new password does contain all of the criteria, return the password as a string
-    console.log("Password : " + newPassword.passWord.join(""));
-    return newPassword.passWord.join("");  
+  //Password is generated
+  // new random character is generated and assigned to variable newChar
+  for(var i = 0; i < newPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
   }
-  else {
-    // if the new password does not contain all the criteria, make a new password
-    createNewPassword();
-  }
+  // have the function return the new password
+  return newPassword.passWord.join("");
 };
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -215,6 +194,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+
 }
 
 // Add event listener to generate button
