@@ -45,7 +45,7 @@ var askCriteria = function() {
   // convert the string entered to an integer number
   newPassword.length = parseInt(newPassword.length);
 
-  while (isNaN(newPassword.length) || newPassword.length < 1 || newPassword.length > 128) {
+  while (isNaN(newPassword.length) || newPassword.length < 8 || newPassword.length > 128) {
     newPassword.length = window.prompt("This is not a valid password length!  Please choose a number between 8 and 128.");
     newPassword.length = parseInt(newPassword.length);
   }
@@ -168,13 +168,6 @@ var getChar = function () { // generates a rancom character.  found that I neede
 };
 
 
-var createPassword = function() {
-  debugger;
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-  }
-};
 
 var validatePassword = function(tempPassword) {
   if (tempPassword.uppercase === isUpper && tempPassword.lowercase === isLower && tempPassword.numbers === isNumber && tempPassword.specialChar === isSpec) {
@@ -185,6 +178,26 @@ var validatePassword = function(tempPassword) {
   }
 };
 
+var createPassword = function() {
+  // debugger;
+  var tempPassword = newPassword;
+  for(var i = 0; i < tempPassword.length; i++) {
+    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
+    tempPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
+  }
+  if (validatePassword(tempPassword) && tempPassword.length === newPassword.length) {
+    newPassword = tempPassword;
+  }
+  else {
+    tempPassword.passWord = [];
+    isUpper = false;
+    isLower = false;
+    isNumber = false;
+    isSpec = false;
+    createPassword();
+  }
+};
+
 var generatePassword = function() {  
   // Ask for pasword criteria with a series of promps
   askCriteria();  
@@ -192,19 +205,12 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
+  // debugger;
   createPassword();
   // have the function return the new password
-  if (validatePassword(newPassword)) {
-    return newPassword.passWord.join("");
-  }
-  else {
-    newPassword.passWord = [];
-    isUpper = false;
-    isLower = false;
-    isNumber = false;
-    isSpec = false;
-    createPassword();
-  }
+  
+  return newPassword.passWord.join("");
+
 };
 
 /*
