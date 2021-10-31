@@ -175,16 +175,6 @@ var createNewPassword = function () {
   }
 }
 
-var validatePassword = function() {
-  if (newPassword.uppercase === isUpper && newPassword.lowercase === isLower && newPassword.numbers === isNumber && newPassword.specialChar === isSpec) {
-    return true;
-  }
-  else {
-    newPassword.passWord = [];
-    return false;
-  }
-};
-
 var displayPassword = function() {
   console.log(newPassword.passWord.join(""));
   window.alert(newPassword.passWord.join(""));
@@ -200,7 +190,6 @@ var validatePassword = function(tempPassword) {
 };
 
 var createPassword = function() {
-  // debugger;
   var tempPassword = newPassword;
   for(var i = 0; i < tempPassword.length; i++) {
     getChar();  // assignes a random character matching usder defiend criteria to variable newChar
@@ -226,28 +215,12 @@ var generatePassword = function() {
   validateCriteria();
   //Password is generated
   // new random character is generated and assigned to variable newChar
-  // debugger;
   createPassword();
   // have the function return the new password
   console.log("Password: " + newPassword.passWord.join(""));
   return newPassword.passWord.join("");
 
 };
-
-/*
-var generatePassword = function() {  
-  // Ask for pasword criteria with a series of promps
-  askCriteria();  
-  // Verify that at least one character type has been selected
-  validateCriteria();
-  //Password is generated
-  // new random character is generated and assigned to variable newChar
-  for(var i = 0; i < newPassword.length; i++) {
-    getChar();  // assignes a random character matching usder defiend criteria to variable newChar
-    newPassword.passWord.push(newChar); // adds the new random character to the storage array inside object newPassword
-  }
-};
-*/
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
